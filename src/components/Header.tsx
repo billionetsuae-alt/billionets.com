@@ -72,13 +72,19 @@ export const Header = () => {
                 key={item.name}
                 to={item.href}
                 className={cn(
-                  "text-sm font-semibold leading-6 transition-colors duration-base",
+                  "text-sm font-semibold leading-6 transition-all duration-base relative group",
                   location.pathname === item.href
                     ? "text-accent-gold"
                     : "text-ink hover:text-accent-gold"
                 )}
               >
                 {item.name}
+                <span
+                  className={cn(
+                    "absolute bottom-0 left-0 w-0 h-0.5 bg-accent-gold transition-all duration-base group-hover:w-full",
+                    location.pathname === item.href && "w-full"
+                  )}
+                />
               </Link>
             ))}
           </div>
@@ -94,23 +100,26 @@ export const Header = () => {
         {/* Mobile menu */}
         <div
           className={cn(
-            "lg:hidden fixed inset-0 top-20 bg-background transition-all duration-medium",
+            "lg:hidden fixed inset-0 top-20 bg-background transition-all duration-medium ease-smooth",
             mobileMenuOpen
-              ? "opacity-100 visible"
-              : "opacity-0 invisible pointer-events-none"
+              ? "opacity-100 visible translate-y-0"
+              : "opacity-0 invisible -translate-y-4 pointer-events-none"
           )}
         >
           <div className="flex flex-col px-6 py-8 gap-4">
-            {navigation.map((item) => (
+            {navigation.map((item, index) => (
               <Link
                 key={item.name}
                 to={item.href}
                 className={cn(
-                  "text-lg font-semibold py-3 border-b border-border transition-colors",
+                  "text-lg font-semibold py-3 border-b border-border transition-all duration-base transform",
                   location.pathname === item.href
-                    ? "text-accent-gold"
-                    : "text-ink"
+                    ? "text-accent-gold translate-x-2"
+                    : "text-ink hover:text-accent-gold hover:translate-x-2"
                 )}
+                style={{
+                  animationDelay: mobileMenuOpen ? `${index * 50}ms` : "0ms",
+                }}
               >
                 {item.name}
               </Link>

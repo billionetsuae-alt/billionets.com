@@ -8,44 +8,60 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Billionets Brand Colors - Exact HSL conversions */
+    /* Billionets Brand Colors - Gold, Black, White Only */
+    /* OPTION 1: White Background (commented out - uncomment to switch back) */
     --base-white: 0 0% 100%;
-    --surface: 0 0% 92%;
+    --surface: 0 0% 100%;
     --accent-gold: 48 62% 61%;
     --ink: 0 0% 0%;
-    
-    /* Semantic tokens mapped to brand */
     --background: var(--base-white);
     --foreground: var(--ink);
-    
     --card: var(--base-white);
     --card-foreground: var(--ink);
-    
     --popover: var(--base-white);
     --popover-foreground: var(--ink);
-    
     --primary: var(--accent-gold);
     --primary-foreground: var(--ink);
-    
-    --secondary: var(--surface);
+    --secondary: var(--base-white);
     --secondary-foreground: var(--ink);
-    
-    --muted: var(--surface);
-    --muted-foreground: 0 0% 40%;
-    
+    --muted: var(--base-white);
+    --muted-foreground: 0 0% 0%;
     --accent: var(--accent-gold);
     --accent-foreground: var(--ink);
-    
     --destructive: 0 84% 60%;
     --destructive-foreground: var(--base-white);
-    
-    --border: 0 0% 88%;
-    --input: 0 0% 88%;
+    --border: 0 0% 0%;
+    --input: 0 0% 100%;
     --ring: var(--accent-gold);
-    
-    /* Custom semantic tokens */
     --hero-gradient-start: var(--base-white);
-    --hero-gradient-end: var(--surface);
+    --hero-gradient-end: var(--base-white);
+    
+    /* OPTION 2: Black Background with White/Gold Foreground (ACTIVE) */
+    /* --base-white: 0 0% 100%;
+    --surface: 0 0% 0%;
+    --accent-gold: 48 62% 61%;
+    --ink: 0 0% 100%;
+    --background: var(--surface);
+    --foreground: var(--ink);
+    --card: 0 0% 5%;
+    --card-foreground: var(--ink);
+    --popover: var(--surface);
+    --popover-foreground: var(--ink);
+    --primary: var(--accent-gold);
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: var(--ink);
+    --muted: 0 0% 5%;
+    --muted-foreground: 0 0% 100%;
+    --accent: var(--accent-gold);
+    --accent-foreground: var(--surface);
+    --destructive: 0 84% 60%;
+    --destructive-foreground: var(--base-white);
+    --border: 0 0% 100%;
+    --input: 0 0% 5%;
+    --ring: var(--accent-gold);
+    --hero-gradient-start: var(--surface);
+    --hero-gradient-end: 0 0% 5%; */
     
     /* Spacing scale */
     --space-1: 0.25rem;
@@ -85,6 +101,10 @@ All colors MUST be HSL.
     @apply border-border;
   }
   
+  html {
+    scroll-behavior: smooth;
+  }
+  
   body {
     @apply bg-background text-foreground;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
@@ -102,12 +122,56 @@ All colors MUST be HSL.
     animation: fadeIn var(--duration-medium) var(--ease-smooth);
   }
   
+  .animate-fade-in-up {
+    animation: fadeInUp var(--duration-medium) var(--ease-smooth);
+  }
+  
+  .animate-fade-in-scale {
+    animation: fadeInScale var(--duration-medium) var(--ease-smooth);
+  }
+  
   .animate-slide-up {
     animation: slideUp var(--duration-medium) var(--ease-smooth);
   }
   
+  .animate-slide-in-left {
+    animation: slideInLeft var(--duration-medium) var(--ease-smooth);
+  }
+  
+  .animate-slide-in-right {
+    animation: slideInRight var(--duration-medium) var(--ease-smooth);
+  }
+  
   .animate-scale-in {
     animation: scaleIn var(--duration-base) var(--ease-smooth);
+  }
+  
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity var(--duration-slow) var(--ease-smooth),
+                transform var(--duration-slow) var(--ease-smooth);
+  }
+  
+  .animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .animate-on-scroll-delay-1 {
+    transition-delay: 100ms;
+  }
+  
+  .animate-on-scroll-delay-2 {
+    transition-delay: 200ms;
+  }
+  
+  .animate-on-scroll-delay-3 {
+    transition-delay: 300ms;
+  }
+  
+  .animate-on-scroll-delay-4 {
+    transition-delay: 400ms;
   }
   
   .hover-lift {
@@ -116,7 +180,7 @@ All colors MUST be HSL.
   }
   
   .hover-lift:hover {
-    transform: translateY(-4px);
+    transform: translateY(-6px) scale(1.02);
     box-shadow: var(--shadow-lg);
   }
   
@@ -132,6 +196,20 @@ All colors MUST be HSL.
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+  }
+  
+  .smooth-scroll {
+    scroll-behavior: smooth;
+  }
+  
+  /* Muted text with opacity for better contrast */
+  .text-muted-foreground {
+    color: hsl(var(--muted-foreground) / 0.7);
+  }
+  
+  /* Border with opacity */
+  .border-border {
+    border-color: hsl(var(--border) / 0.2);
   }
 }
 
@@ -170,10 +248,60 @@ All colors MUST be HSL.
 
 @keyframes float {
   0%, 100% {
-    transform: translateY(0px);
+    transform: translateY(0px) translateX(0px);
+  }
+  25% {
+    transform: translateY(-8px) translateX(2px);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-12px) translateX(0px);
+  }
+  75% {
+    transform: translateY(-8px) translateX(-2px);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 

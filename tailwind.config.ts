@@ -93,17 +93,35 @@ export default {
           from: { opacity: "0", transform: "translateY(12px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
+        fadeInUp: {
+          from: { opacity: "0", transform: "translateY(30px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        fadeInScale: {
+          from: { opacity: "0", transform: "scale(0.95) translateY(20px)" },
+          to: { opacity: "1", transform: "scale(1) translateY(0)" },
+        },
         slideUp: {
           from: { opacity: "0", transform: "translateY(24px)" },
           to: { opacity: "1", transform: "translateY(0)" },
+        },
+        slideInLeft: {
+          from: { opacity: "0", transform: "translateX(-30px)" },
+          to: { opacity: "1", transform: "translateX(0)" },
+        },
+        slideInRight: {
+          from: { opacity: "0", transform: "translateX(30px)" },
+          to: { opacity: "1", transform: "translateX(0)" },
         },
         scaleIn: {
           from: { opacity: "0", transform: "scale(0.98)" },
           to: { opacity: "1", transform: "scale(1)" },
         },
         float: {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-10px)" },
+          "0%, 100%": { transform: "translateY(0px) translateX(0px)" },
+          "25%": { transform: "translateY(-8px) translateX(2px)" },
+          "50%": { transform: "translateY(-12px) translateX(0px)" },
+          "75%": { transform: "translateY(-8px) translateX(-2px)" },
         },
         shimmer: {
           "0%": { backgroundPosition: "-1000px 0" },
@@ -114,9 +132,13 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fadeIn 420ms var(--ease-smooth)",
+        "fade-in-up": "fadeInUp 420ms var(--ease-smooth)",
+        "fade-in-scale": "fadeInScale 420ms var(--ease-smooth)",
         "slide-up": "slideUp 420ms var(--ease-smooth)",
+        "slide-in-left": "slideInLeft 420ms var(--ease-smooth)",
+        "slide-in-right": "slideInRight 420ms var(--ease-smooth)",
         "scale-in": "scaleIn 250ms var(--ease-smooth)",
-        float: "float 3s ease-in-out infinite",
+        float: "float 4s ease-in-out infinite",
         shimmer: "shimmer 2s linear infinite",
       },
     },

@@ -8,9 +8,9 @@ const button3dVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-accent-gold text-ink shadow-gold hover:shadow-lg hover:scale-[1.03] active:scale-[0.98] active:shadow-md",
-        secondary: "border-2 border-ink bg-transparent text-ink hover:bg-surface hover:scale-[1.03] active:scale-[0.98]",
-        ghost: "bg-transparent text-ink hover:bg-surface/50 hover:scale-[1.02] active:scale-[0.99]",
+        primary: "bg-accent-gold text-primary-foreground shadow-gold hover:shadow-lg hover:scale-[1.03] active:scale-[0.98] active:shadow-md",
+        secondary: "border-2 border-ink bg-transparent text-ink hover:bg-white/10 hover:scale-[1.03] active:scale-[0.98]",
+        ghost: "bg-transparent text-ink hover:bg-white/10 hover:scale-[1.02] active:scale-[0.99]",
       },
       size: {
         default: "h-12 px-8 py-3 text-base",
