@@ -36,10 +36,16 @@ export const Footer = () => {
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
-    if (isTouchDevice) {
+    const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
+    const hasTouchCapability =
+      "ontouchstart" in window || navigator.maxTouchPoints > 0;
+    const isTouchOnly = hasTouchCapability && !hasFinePointer;
+
+    if (isTouchOnly) {
       document.body.classList.add("no-pointer-tilt");
+    } else {
+      document.body.classList.remove("no-pointer-tilt");
     }
 
     let removeCursorListener: (() => void) | undefined;
@@ -47,8 +53,8 @@ export const Footer = () => {
     const ctx = gsap.context(() => {
       if (prefersReducedMotion) return;
 
-      // 1. Card Tilt
-      if (!isTouchDevice) {
+      // 1. Card Tilt (desktop / devices with a fine pointer)
+      if (hasFinePointer) {
         const tiltCards = document.querySelectorAll(".card.tilt");
         tiltCards.forEach((card) => {
           const strength = parseFloat(card.getAttribute("data-tilt-strength") || "14");
@@ -117,8 +123,8 @@ export const Footer = () => {
         }
       });
 
-      // 3. Hero Pointer Parallax (desktop)
-      if (!isTouchDevice) {
+      // 3. Hero Pointer Parallax (desktop / fine pointer)
+      if (hasFinePointer) {
         const heroes = document.querySelectorAll(".hero-parallax");
         heroes.forEach((hero) => {
           hero.addEventListener("mousemove", (e: any) => {
@@ -136,8 +142,8 @@ export const Footer = () => {
         });
       }
 
-      // 3b. Hero Scroll Parallax (mobile / touch)
-      if (isTouchDevice) {
+      // 3b. Hero Scroll Parallax (mobile / touch-only)
+      if (!hasFinePointer) {
         const heroes = document.querySelectorAll(".hero-parallax");
         heroes.forEach((hero) => {
           const heroElement = hero as HTMLElement;
@@ -164,8 +170,8 @@ export const Footer = () => {
         });
       }
 
-      // 4. Cursor Follower
-      if (!isTouchDevice) {
+      // 4. Cursor Follower (desktop / fine pointer)
+      if (hasFinePointer) {
         let cursor = document.querySelector(".cursor-dot");
         if (!cursor) {
              cursor = document.createElement("div");

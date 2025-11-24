@@ -418,6 +418,50 @@ All colors MUST be HSL.
   width: 100%;
 }
 
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.1rem 0.35rem;
+  transition:
+    color var(--v-duration) var(--v-ease),
+    transform var(--v-duration) var(--v-ease);
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.18rem;
+  width: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: hsl(var(--accent));
+  transform-origin: center;
+  transition:
+    width 0.25s var(--v-ease),
+    transform 0.25s var(--v-ease);
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  transform: translateY(-1px) scale(1.06) rotate(-0.5deg);
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  width: 100%;
+}
+
+.nav-link--active {
+  color: hsl(var(--accent));
+}
+
+.nav-link--active::after {
+  width: 100%;
+}
+
 .hero-parallax {
   will-change: transform;
 }
@@ -456,10 +500,6 @@ All colors MUST be HSL.
   .cursor-dot {
     display: none;
   }
-}
-
-.no-pointer-tilt .card.tilt {
-  transform: none !important;
 }
 
 :focus-visible {

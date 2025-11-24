@@ -63,28 +63,37 @@ export default function About() {
       {/* Mission & Vision */}
       <section className="py-24 bg-background">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {values.map((value, index) => (
-              <Card
-                key={value.title}
-                className="card tilt p-8 hover-lift cursor-pointer border border-border"
-                data-tilt-strength="10"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div
-                  className="mb-6 reveal-wrap inline-block rounded-lg"
-                  data-reveal-duration="0.7"
+          <AnimatedSection direction="up" stagger={0.12}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {values.map((value, index) => (
+                <Card
+                  key={value.title}
+                  className="card tilt glass relative overflow-hidden p-8 hover-lift cursor-pointer border border-border"
+                  data-tilt-strength="10"
+                  style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  <div className="reveal-overlay" />
-                  <div className="reveal-img inline-flex p-4 bg-surface rounded-lg">
-                    <value.icon className="h-8 w-8 text-accent-gold" />
+                  <div className="absolute inset-0 pointer-events-none">
+                    <div className="absolute -top-20 -right-10 h-32 w-32 rounded-full bg-accent-gold/18 blur-3xl animate-float" />
+                    <div className="absolute -bottom-24 -left-10 h-40 w-40 rounded-full bg-accent-gold/10 blur-3xl animate-float" />
                   </div>
-                </div>
-                <h3 className="text-xl font-bold text-ink mb-3">{value.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{value.description}</p>
-              </Card>
-            ))}
-          </div>
+
+                  <div className="relative z-10">
+                    <div
+                      className="mb-6 reveal-wrap inline-block rounded-lg"
+                      data-reveal-duration="0.7"
+                    >
+                      <div className="reveal-overlay" />
+                      <div className="reveal-img inline-flex p-4 bg-surface rounded-lg">
+                        <value.icon className="h-8 w-8 text-accent-gold" />
+                      </div>
+                    </div>
+                    <h3 className="text-xl font-bold text-ink mb-3">{value.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed">{value.description}</p>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
@@ -126,19 +135,28 @@ export default function About() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {capabilities.map((capability) => (
-              <div
-                key={capability.name}
-                className="p-4 bg-surface border border-border rounded-lg hover:border-accent-gold hover:shadow-gold transition-all duration-base cursor-pointer"
-              >
-                <div className="text-xs text-accent-gold font-semibold mb-1">
-                  {capability.category}
+          <AnimatedSection direction="up" stagger={0.08}>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {capabilities.map((capability) => (
+                <div
+                  key={capability.name}
+                  className="card tilt glass relative overflow-hidden p-4 border border-border rounded-lg hover-lift cursor-pointer"
+                  data-tilt-strength="8"
+                >
+                  <div className="absolute inset-0 pointer-events-none">
+                    <div className="absolute -top-16 -right-8 h-24 w-24 rounded-full bg-accent-gold/16 blur-3xl animate-float" />
+                  </div>
+
+                  <div className="relative z-10">
+                    <div className="text-xs text-accent-gold font-semibold mb-1">
+                      {capability.category}
+                    </div>
+                    <div className="text-sm font-semibold text-ink">{capability.name}</div>
+                  </div>
                 </div>
-                <div className="text-sm font-semibold text-ink">{capability.name}</div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
@@ -149,25 +167,37 @@ export default function About() {
             Our Journey
           </h2>
 
-          <div className="space-y-8">
-            {timeline.map((event, index) => (
-              <div
-                key={event.year}
-                className="flex gap-6 items-start group"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="flex-shrink-0 w-24">
-                  <div className="text-2xl font-bold text-accent-gold">{event.year}</div>
-                </div>
-                <div className="flex-grow">
-                  <div className="card tilt p-6 bg-background border border-border rounded-lg hover-lift cursor-pointer" data-tilt-strength="8">
-                    <h3 className="text-xl font-bold text-ink mb-2">{event.title}</h3>
-                    <p className="text-muted-foreground">{event.description}</p>
+          <AnimatedSection direction="up" stagger={0.16}>
+            <div className="space-y-8">
+              {timeline.map((event, index) => (
+                <div
+                  key={event.year}
+                  className="flex gap-6 items-start group"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className="flex-shrink-0 w-24">
+                    <div className="text-2xl font-bold text-accent-gold">{event.year}</div>
+                  </div>
+                  <div className="flex-grow">
+                    <div
+                      className="card tilt glass relative overflow-hidden p-6 border border-border rounded-lg hover-lift cursor-pointer"
+                      data-tilt-strength="8"
+                    >
+                      <div className="absolute inset-0 pointer-events-none">
+                        <div className="absolute -top-16 -right-12 h-28 w-28 rounded-full bg-accent-gold/18 blur-3xl animate-float" />
+                        <div className="absolute -bottom-20 -left-10 h-32 w-32 rounded-full bg-accent-gold/10 blur-3xl animate-float" />
+                      </div>
+
+                      <div className="relative z-10">
+                        <h3 className="text-xl font-bold text-ink mb-2">{event.title}</h3>
+                        <p className="text-muted-foreground">{event.description}</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
@@ -180,20 +210,29 @@ export default function About() {
             and business acumen. Based in Dubai, we serve clients across the UAE and beyond, always 
             delivering exceptional results with a personal touch.
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {["Developers", "Designers", "AI Specialists", "Project Managers"].map((role) => (
-              <Card
-                key={role}
-                className="card tilt p-6 border border-border hover-lift cursor-pointer"
-                data-tilt-strength="10"
-              >
-                <div className="w-16 h-16 bg-accent-gold/10 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <Users className="h-8 w-8 text-accent-gold" />
-                </div>
-                <div className="font-semibold text-ink">{role}</div>
-              </Card>
-            ))}
-          </div>
+          <AnimatedSection direction="up" stagger={0.12}>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {["Developers", "Designers", "AI Specialists", "Project Managers"].map((role) => (
+                <Card
+                  key={role}
+                  className="card tilt glass relative overflow-hidden p-6 border border-border hover-lift cursor-pointer"
+                  data-tilt-strength="10"
+                >
+                  <div className="absolute inset-0 pointer-events-none">
+                    <div className="absolute -top-16 -right-10 h-28 w-28 rounded-full bg-accent-gold/18 blur-3xl animate-float" />
+                    <div className="absolute -bottom-20 -left-8 h-28 w-28 rounded-full bg-accent-gold/10 blur-3xl animate-float" />
+                  </div>
+
+                  <div className="relative z-10">
+                    <div className="w-16 h-16 bg-accent-gold/10 rounded-full mx-auto mb-4 flex items-center justify-center">
+                      <Users className="h-8 w-8 text-accent-gold" />
+                    </div>
+                    <div className="font-semibold text-ink">{role}</div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </AnimatedSection>
         </div>
       </section>
     </main>

@@ -95,27 +95,23 @@ export const Header = () => {
           </div>
 
           {/* Desktop navigation */}
-          <div className="hidden lg:flex lg:gap-x-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={cn(
-                  "text-sm font-semibold leading-6 transition-all duration-base relative group",
-                  location.pathname === item.href
-                    ? "text-accent-gold"
-                    : "text-base-white hover:text-accent-gold"
-                )}
-              >
-                {item.name}
-                <span
+          <div className="hidden lg:flex lg:gap-x-3">
+            {navigation.map((item) => {
+              const isActive = location.pathname === item.href;
+
+              return (
+                <Link
+                  key={item.name}
+                  to={item.href}
                   className={cn(
-                    "absolute bottom-0 left-0 w-0 h-0.5 bg-accent-gold transition-all duration-base group-hover:w-full",
-                    location.pathname === item.href && "w-full"
+                    "nav-link text-sm font-semibold leading-6",
+                    isActive ? "nav-link--active" : "text-base-white"
                   )}
-                />
-              </Link>
-            ))}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Desktop CTA */}

@@ -72,71 +72,118 @@ export default function Contact() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Contact Info */}
-            <div className="lg:col-span-1 space-y-6">
-              <Card className="card tilt p-6 border border-border hover-lift" data-tilt-strength="8">
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-accent-gold/10 rounded-lg">
-                    <MapPin className="h-6 w-6 text-accent-gold" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-ink mb-1">Visit Us</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Dubai, United Arab Emirates
-                    </p>
-                  </div>
-                </div>
-              </Card>
+            <div className="lg:col-span-1">
+              <AnimatedSection direction="up" stagger={0.12}>
+                <div className="space-y-6">
+                  <Card
+                    className="card tilt glass relative overflow-hidden p-6 border border-border hover-lift cursor-pointer"
+                    data-tilt-strength="10"
+                  >
+                    <div className="absolute inset-0 pointer-events-none">
+                      <div className="absolute -top-16 -right-8 h-24 w-24 rounded-full bg-accent-gold/18 blur-3xl animate-float" />
+                      <div className="absolute -bottom-16 -left-8 h-24 w-24 rounded-full bg-accent-gold/10 blur-3xl animate-float" />
+                    </div>
 
-              <Card className="card tilt p-6 border border-border hover-lift" data-tilt-strength="8">
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-accent-gold/10 rounded-lg">
-                    <Mail className="h-6 w-6 text-accent-gold" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-ink mb-1">Email Us</h3>
-                    <a
-                      href="mailto:info@billionets.com"
-                      className="text-sm text-muted-foreground hover:text-accent-gold transition-colors link-reveal"
-                    >
-                      info@billionets.com
-                    </a>
-                  </div>
-                </div>
-              </Card>
+                    <div className="relative z-10">
+                      <div className="flex items-start gap-4">
+                        <div className="p-3 bg-accent-gold/10 rounded-lg">
+                          <MapPin className="h-6 w-6 text-accent-gold" />
+                        </div>
+                        <div>
+                          <h3 className="font-semibold text-ink mb-1">Visit Us</h3>
+                          <p className="text-sm text-muted-foreground">
+                            Dubai, United Arab Emirates
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </Card>
 
-              <Card className="p-6 border border-border hover-lift">
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-accent-gold/10 rounded-lg">
-                    <Phone className="h-6 w-6 text-accent-gold" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-ink mb-1">Call Us</h3>
-                    <a
-                      href="tel:+971501234567"
-                      className="text-sm text-muted-foreground hover:text-accent-gold transition-colors link-reveal"
-                    >
-                      +971 50 123 4567
-                    </a>
-                  </div>
-                </div>
-              </Card>
+                  <Card
+                    className="card tilt glass relative overflow-hidden p-6 border border-border hover-lift cursor-pointer"
+                    data-tilt-strength="10"
+                  >
+                    <div className="absolute inset-0 pointer-events-none">
+                      <div className="absolute -top-16 -right-8 h-24 w-24 rounded-full bg-accent-gold/18 blur-3xl animate-float" />
+                      <div className="absolute -bottom-16 -left-8 h-24 w-24 rounded-full bg-accent-gold/10 blur-3xl animate-float" />
+                    </div>
 
-              <Card className="p-6 border border-accent-gold bg-accent-gold/5">
-                <h3 className="font-semibold text-ink mb-2">Business Hours</h3>
-                <div className="text-sm text-muted-foreground space-y-1">
-                  <p>Sunday - Thursday: 9:00 AM - 6:00 PM</p>
-                  <p>Friday - Saturday: Closed</p>
+                    <div className="relative z-10">
+                      <div className="flex items-start gap-4">
+                        <div className="p-3 bg-accent-gold/10 rounded-lg">
+                          <Mail className="h-6 w-6 text-accent-gold" />
+                        </div>
+                        <div>
+                          <h3 className="font-semibold text-ink mb-1">Email Us</h3>
+                          <a
+                            href="mailto:info@billionets.com"
+                            className="text-sm text-muted-foreground hover:text-accent-gold transition-colors link-reveal"
+                          >
+                            info@billionets.com
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </Card>
+
+                  <Card
+                    className="card tilt glass relative overflow-hidden p-6 border border-border hover-lift cursor-pointer"
+                    data-tilt-strength="10"
+                  >
+                    <div className="absolute inset-0 pointer-events-none">
+                      <div className="absolute -top-16 -right-8 h-24 w-24 rounded-full bg-accent-gold/18 blur-3xl animate-float" />
+                      <div className="absolute -bottom-16 -left-8 h-24 w-24 rounded-full bg-accent-gold/10 blur-3xl animate-float" />
+                    </div>
+
+                    <div className="relative z-10">
+                      <div className="flex items-start gap-4">
+                        <div className="p-3 bg-accent-gold/10 rounded-lg">
+                          <Phone className="h-6 w-6 text-accent-gold" />
+                        </div>
+                        <div>
+                          <h3 className="font-semibold text-ink mb-1">Call Us</h3>
+                          <a
+                            href="tel:+971501234567"
+                            className="text-sm text-muted-foreground hover:text-accent-gold transition-colors link-reveal"
+                          >
+                            +971 50 123 4567
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </Card>
+
+                  <Card
+                    className="card tilt glass relative overflow-hidden p-6 border border-accent-gold/70 hover-lift cursor-pointer"
+                    data-tilt-strength="10"
+                  >
+                    <div className="absolute inset-0 pointer-events-none">
+                      <div className="absolute -top-14 -right-8 h-24 w-24 rounded-full bg-accent-gold/22 blur-3xl animate-float" />
+                      <div className="absolute -bottom-16 -left-10 h-28 w-28 rounded-full bg-accent-gold/12 blur-3xl animate-float" />
+                    </div>
+
+                    <div className="relative z-10">
+                      <h3 className="font-semibold text-ink mb-2">Business Hours</h3>
+                      <div className="text-sm text-muted-foreground space-y-1">
+                        <p>Sunday - Thursday: 9:00 AM - 6:00 PM</p>
+                        <p>Friday - Saturday: Closed</p>
+                      </div>
+                    </div>
+                  </Card>
                 </div>
-              </Card>
+              </AnimatedSection>
             </div>
 
             {/* Contact Form */}
             <div className="lg:col-span-2">
-              <AnimatedSection direction="up">
+              <AnimatedSection direction="scale">
                 <div className="relative group">
                   <div className="pointer-events-none absolute -inset-px rounded-3xl bg-gradient-to-tr from-accent-gold/60 via-accent-gold/10 to-transparent opacity-60 group-hover:opacity-100 blur-xl transition-all duration-slow" />
-                  <div className="pointer-events-none absolute -top-32 -right-16 h-56 w-56 rounded-full bg-accent-gold/10 blur-3xl" />
-                  <Card className="relative p-8 lg:p-10 rounded-3xl border border-border/60 bg-background/90 backdrop-blur-xl shadow-gold transition-all duration-medium transform group-hover:-translate-y-1 group-hover:shadow-lg group-hover:scale-[1.01]">
+                  <div className="pointer-events-none absolute -top-32 -right-16 h-56 w-56 rounded-full bg-accent-gold/10 blur-3xl animate-float" />
+                  <Card
+                    className="card tilt glass relative overflow-hidden p-8 lg:p-10 rounded-3xl border border-border/60 shadow-gold transition-all duration-medium"
+                    data-tilt-strength="14"
+                  >
                     <h2 className="text-2xl sm:text-3xl font-bold text-ink mb-2">Send Us a Message</h2>
                     <p className="text-sm sm:text-base text-muted-foreground mb-6 max-w-xl">
                       Share a few details about your project and our team will get back to you within one business day.
@@ -263,19 +310,21 @@ export default function Contact() {
               2606, Regal Tower, Business Bay, Dubai, UAE
             </p>
           </div>
-          <div
-            className="aspect-video bg-muted rounded-lg overflow-hidden border border-border shadow-md reveal-wrap"
-            data-reveal-duration="0.8"
-          >
-            <div className="reveal-overlay" />
-            <iframe
-              title="Billionets Office Location"
-              src="https://www.google.com/maps?q=2606,+Regal+Tower,+Business+Bay,+Dubai,+UAE&output=embed"
-              className="w-full h-full border-0 reveal-img"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
+          <AnimatedSection direction="up">
+            <div
+              className="aspect-video bg-muted rounded-lg overflow-hidden border border-border shadow-md reveal-wrap"
+              data-reveal-duration="0.8"
+            >
+              <div className="reveal-overlay" />
+              <iframe
+                title="Billionets Office Location"
+                src="https://www.google.com/maps?q=2606,+Regal+Tower,+Business+Bay,+Dubai,+UAE&output=embed"
+                className="w-full h-full border-0 reveal-img"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          </AnimatedSection>
         </div>
       </section>
     </main>

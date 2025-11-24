@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ExternalLink, ArrowRight } from "lucide-react";
 import { Button3D } from "@/components/ui/button-3d";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { AnimatedSection } from "@/components/AnimatedSection";
+import gsap from "gsap";
 
 type ProjectCategory = "All" | "Web" | "Mobile" | "AI" | "Branding";
 
@@ -69,6 +70,54 @@ export default function Portfolio() {
       ? projects
       : projects.filter((project) => project.category === selectedCategory);
 
+  // Re-run the reveal sweep on the portfolio thumbnails whenever the filter changes
+  useEffect(() => {
+    const wraps = document.querySelectorAll<HTMLElement>(".portfolio-reveal");
+
+    wraps.forEach((wrap) => {
+      const overlay = wrap.querySelector<HTMLElement>(".reveal-overlay");
+      const img = wrap.querySelector<HTMLElement>(".reveal-img");
+      if (!overlay || !img) return;
+
+      const duration = parseFloat(wrap.getAttribute("data-reveal-duration") || "0.6");
+
+      gsap.set(img, { opacity: 0 });
+      gsap.set(overlay, { xPercent: -101 });
+
+      const tl = gsap.timeline();
+      tl.to(overlay, {
+        xPercent: 0,
+        duration,
+        ease: "power2.inOut",
+      })
+        .set(img, { opacity: 1 })
+        .to(overlay, {
+          xPercent: 101,
+          duration,
+          ease: "power2.inOut",
+        });
+    });
+  }, [selectedCategory]);
+
+  // Slide-up + fade-in for cards on initial load and filter change
+  useEffect(() => {
+    const cards = document.querySelectorAll<HTMLElement>(".portfolio-card");
+
+    if (!cards.length) return;
+
+    gsap.fromTo(
+      cards,
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power3.out",
+        stagger: 0.08,
+      }
+    );
+  }, [selectedCategory]);
+
   return (
     <main className="min-h-screen pt-20">
       {/* Hero Section */}
@@ -107,80 +156,103 @@ export default function Portfolio() {
           </div>
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project, index) => (
-              <Card
-                key={project.title}
-                className={`card tilt overflow-hidden border border-border cursor-pointer group bg-gradient-to-br ${project.color}`}
-                data-tilt-strength="10"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                {/* Project Image Placeholder */}
-                <div
-                  className="aspect-video reveal-wrap bg-surface/50 flex items-center justify-center border-b border-border"
-                  data-reveal-duration="0.7"
+          <AnimatedSection direction="up" stagger={0.1}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredProjects.map((project, index) => (
+                <Card
+                  key={project.title}
+                  className={`portfolio-card card tilt glass relative overflow-hidden border border-border cursor-pointer group bg-gradient-to-br ${project.color}`}
+                  data-tilt-strength="10"
+                  style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  <div className="reveal-overlay" />
-                  <div className="reveal-img flex items-center justify-center w-full h-full">
-                    <ExternalLink className="h-12 w-12 text-accent-gold opacity-50 group-hover:opacity-100 transition-opacity" />
-                  </div>
-                </div>
-
-                {/* Project Details */}
-                <div className="p-6 space-y-4">
-                  <div>
-                    <h3 className="text-xl font-bold text-ink mb-2">{project.title}</h3>
-                    <p className="text-sm text-muted-foreground">{project.description}</p>
+                  <div className="absolute inset-0 pointer-events-none">
+                    <div className="absolute -top-20 -right-10 h-32 w-32 rounded-full bg-accent-gold/18 blur-3xl animate-float" />
+                    <div className="absolute -bottom-24 -left-10 h-40 w-40 rounded-full bg-accent-gold/10 blur-3xl animate-float" />
                   </div>
 
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="text-xs">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-
-                  {/* Metrics */}
-                  <div className="grid grid-cols-2 gap-4 pt-4 border-t border-border/50">
-                    <div>
-                      <div className="text-lg font-bold text-accent-gold">
-                        {project.metrics.metric1}
+                  <div className="relative z-10">
+                    {/* Project Image Placeholder */}
+                    <div
+                      className="aspect-video reveal-wrap portfolio-reveal bg-surface/50 flex items-center justify-center border-b border-border"
+                      data-reveal-duration="0.7"
+                    >
+                      <div className="reveal-overlay" />
+                      <div className="reveal-img flex items-center justify-center w-full h-full">
+                        <ExternalLink className="h-12 w-12 text-accent-gold opacity-50 group-hover:opacity-100 transition-opacity" />
                       </div>
-                      <div className="text-xs text-muted-foreground">Result</div>
                     </div>
-                    <div>
-                      <div className="text-lg font-bold text-accent-gold">
-                        {project.metrics.metric2}
+
+                    {/* Project Details */}
+                    <div className="p-6 space-y-4">
+                      <div>
+                        <h3 className="text-xl font-bold text-ink mb-2">{project.title}</h3>
+                        <p className="text-sm text-muted-foreground">{project.description}</p>
                       </div>
-                      <div className="text-xs text-muted-foreground">Impact</div>
+
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-2">
+                        {project.tags.map((tag) => (
+                          <Badge key={tag} variant="secondary" className="text-xs">
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
+
+                      {/* Metrics */}
+                      <div className="grid grid-cols-2 gap-4 pt-4 border-t border-border/50">
+                        <div>
+                          <div className="text-lg font-bold text-accent-gold">
+                            {project.metrics.metric1}
+                          </div>
+                          <div className="text-xs text-muted-foreground">Result</div>
+                        </div>
+                        <div>
+                          <div className="text-lg font-bold text-accent-gold">
+                            {project.metrics.metric2}
+                          </div>
+                          <div className="text-xs text-muted-foreground">Impact</div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Card>
-            ))}
-          </div>
+                </Card>
+              ))}
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="py-24 bg-surface">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-ink mb-6">
-            Ready to Create Your Success Story?
-          </h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            Let's discuss how we can help achieve similar results for your business.
-          </p>
-          <Button3D variant="primary" size="lg" asChild>
-            <Link
-              to="/contact"
-              className="link-reveal inline-flex items-center gap-2"
+        <div className="mx-auto max-w-4xl px-6 lg:px-8">
+          <AnimatedSection direction="scale">
+            <Card
+              className="card tilt glass relative overflow-hidden border border-border hover-lift cursor-pointer text-center px-8 py-10 sm:px-12 sm:py-12"
+              data-tilt-strength="14"
             >
-              Start Your Project <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-          </Button3D>
+              <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute -top-20 -right-10 h-32 w-32 rounded-full bg-accent-gold/18 blur-3xl animate-float" />
+                <div className="absolute -bottom-24 -left-10 h-40 w-40 rounded-full bg-accent-gold/10 blur-3xl animate-float" />
+              </div>
+
+              <div className="relative z-10">
+                <h2 className="text-3xl sm:text-4xl font-bold text-ink mb-4">
+                  Ready to Create Your Success Story?
+                </h2>
+                <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+                  Let's discuss how we can help achieve similar results for your business.
+                </p>
+                <Button3D variant="primary" size="lg" asChild>
+                  <Link
+                    to="/contact"
+                    className="link-reveal inline-flex items-center gap-2"
+                  >
+                    Start Your Project <ArrowRight className="ml-2 h-5 w-5" />
+                  </Link>
+                </Button3D>
+              </div>
+            </Card>
+          </AnimatedSection>
         </div>
       </section>
     </main>
