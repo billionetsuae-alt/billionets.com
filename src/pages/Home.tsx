@@ -1,17 +1,10 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Sparkles, Zap, Target, TrendingUp, Users, Award } from "lucide-react";
+import { ArrowRight, Sparkles, Users, Award } from "lucide-react";
 import { Button3D } from "@/components/ui/button-3d";
 import { Card } from "@/components/ui/card";
 import { StructuredData } from "@/components/StructuredData";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { StatCounter } from "@/components/StatCounter";
-
-const services = [
-  { icon: Sparkles, label: "AI Solutions", color: "text-accent-gold" },
-  { icon: Zap, label: "Web Development", color: "text-accent-gold" },
-  { icon: Target, label: "Digital Marketing", color: "text-accent-gold" },
-  { icon: TrendingUp, label: "SEO & Analytics", color: "text-accent-gold" },
-];
 
 const whyBillionets = [
   {
@@ -163,26 +156,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Quick Services Strip */}
-      {false && (
-        <section className="py-12 bg-surface border-y border-border">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {services.map((service, index) => (
-                <AnimatedSection key={service.label} delay={index} direction="up">
-                  <div className="flex flex-col items-center gap-3 text-center group cursor-pointer">
-                    <div className="p-4 bg-background rounded-lg shadow-sm group-hover:shadow-gold transition-all duration-base group-hover:scale-110">
-                      <service.icon className={`h-8 w-8 ${service.color}`} />
-                    </div>
-                    <span className="text-sm font-semibold text-ink">{service.label}</span>
-                  </div>
-                </AnimatedSection>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Why Billionets */}
       <section className="py-24 bg-background">

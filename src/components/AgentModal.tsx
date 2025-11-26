@@ -13,10 +13,10 @@ interface AgentModalProps {
 }
 
 export function AgentModal({ open, variant, onClose }: AgentModalProps) {
-  if (!open) return null;
-
   const isVoice = variant === "voice";
   const cardRef = useRef<HTMLDivElement | null>(null);
+
+  if (!open) return null;
 
   const handleCardMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     const card = cardRef.current;

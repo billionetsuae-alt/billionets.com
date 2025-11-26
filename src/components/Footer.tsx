@@ -59,7 +59,7 @@ export const Footer = () => {
         tiltCards.forEach((card) => {
           const strength = parseFloat(card.getAttribute("data-tilt-strength") || "14");
 
-          card.addEventListener("mousemove", (e: any) => {
+          card.addEventListener("mousemove", (e: MouseEvent) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
@@ -127,7 +127,7 @@ export const Footer = () => {
       if (hasFinePointer) {
         const heroes = document.querySelectorAll(".hero-parallax");
         heroes.forEach((hero) => {
-          hero.addEventListener("mousemove", (e: any) => {
+          hero.addEventListener("mousemove", (e: MouseEvent) => {
             const x = (e.clientX / window.innerWidth - 0.5) * 20;
             const y = (e.clientY / window.innerHeight - 0.5) * 20;
 

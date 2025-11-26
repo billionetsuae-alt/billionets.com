@@ -19,6 +19,24 @@ The app will start on `http://localhost:8080` (configured via Vite).
 - shadcn-ui
 - React Router
 
+## Environment & API
+
+The floating chat assistant uses a serverless function that calls the Google Gemini API.
+
+- Serverless function: `api/chat.ts`
+- Required environment variable:
+  - `GEMINI_API_KEY` – your Google Generative Language API key
+
+Local development:
+
+```bash
+cp .env.example .env   # if you create an example file
+# then add GEMINI_API_KEY=...
+npm run dev
+```
+
+In production on Vercel, set `GEMINI_API_KEY` under **Project → Settings → Environment Variables**.
+
 ## Visual & Motion System
 
 Global CSS and the footer script provide the following interaction primitives:

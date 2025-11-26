@@ -13,6 +13,8 @@ const initialAssistantMessage: ChatMessage = {
     "Hi, I'm the Billionets assistant. Ask me anything about our AI solutions, services, or working with us.",
 };
 
+const CHAT_API_BASE_URL = import.meta.env.DEV ? "https://billionets.vercel.app" : "";
+
 export function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([initialAssistantMessage]);
@@ -30,7 +32,7 @@ export function ChatWidget() {
     setError(null);
 
     try {
-      const res = await fetch("/api/chat", {
+      const res = await fetch(`${CHAT_API_BASE_URL}/api/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

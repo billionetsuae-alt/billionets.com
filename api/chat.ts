@@ -3,13 +3,45 @@ type ChatMessage = {
   content: string;
 };
 
-function setCorsHeaders(res: any) {
+type ChatRequestBody = {
+  messages?: ChatMessage[];
+};
+
+type ChatRequest = {
+  method?: string;
+  body?: ChatRequestBody;
+};
+
+type ChatResponse = {
+  setHeader(name: string, value: string): void;
+  status(code: number): ChatResponse;
+  json(body: unknown): void;
+  end(body?: string): void;
+};
+
+type GeminiPart = {
+  text?: string;
+};
+
+type GeminiContent = {
+  parts?: GeminiPart[];
+};
+
+type GeminiCandidate = {
+  content?: GeminiContent;
+};
+
+type GeminiResponse = {
+  candidates?: GeminiCandidate[];
+};
+
+function setCorsHeaders(res: ChatResponse) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   res.setHeader("Access-Control-Allow-Methods", "POST,OPTIONS");
 }
 
-export default async function handler(req: any, res: any) {
+export default async function handler(req: ChatRequest, res: ChatResponse) {
   setCorsHeaders(res);
 
   if (req.method === "OPTIONS") {
@@ -27,7 +59,7 @@ export default async function handler(req: any, res: any) {
 
   let messages: ChatMessage[] = [];
   try {
-    const body = req.body ?? {};
+    const body = (req.body ?? {}) as ChatRequestBody;
     messages = Array.isArray(body.messages) ? body.messages : [];
   } catch {
     return res.status(400).json({ error: "Invalid JSON body" });
@@ -74,10 +106,10 @@ export default async function handler(req: any, res: any) {
       return res.status(500).json({ error: "Error from Gemini API" });
     }
 
-    const data = (await response.json()) as any;
+    const data = (await response.json()) as GeminiResponse;
     const reply =
-      data?.candidates?.[0]?.content?.parts
-        ?.map((p: any) => p.text || "")
+      data.candidates?.[0]?.content?.parts
+        ?.map((p) => p.text ?? "")
         .join("\n") ||
       "Sorry, I couldn't generate a response right now.";
 
