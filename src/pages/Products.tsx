@@ -19,6 +19,7 @@ import { AgentModal, type AgentModalVariant } from "@/components/AgentModal";
 const products = [
   {
     icon: PhoneCall,
+    image: "/Voice Call Agent Image.png",
     name: "AI Voice Agent",
     tagline: "Intelligent, Real-Time Call Automation",
     description:
@@ -219,7 +220,7 @@ export default function Products() {
 
                 {/* Product Visual */}
                 <Card
-                  className={`card tilt p-12 border border-border bg-gradient-to-br ${product.color} ${
+                  className={`card tilt p-8 border border-border bg-gradient-to-br ${product.color} ${
                     index % 2 === 1 ? "lg:order-1" : ""
                   }`}
                   data-tilt-strength="12"
@@ -231,8 +232,18 @@ export default function Products() {
                     >
                       <div className="reveal-overlay" />
                       <div className="reveal-img relative flex items-center justify-center">
-                        <div className="absolute inset-0 bg-accent-gold/20 rounded-full blur-3xl animate-float" />
-                        <product.icon className="h-32 w-32 text-accent-gold relative z-10" />
+                        {!product.image && (
+                          <div className="absolute inset-0 bg-accent-gold/20 rounded-full blur-3xl animate-float" />
+                        )}
+                        {product.image ? (
+                          <img
+                            src={product.image}
+                            alt={product.name}
+                            className="relative z-10 max-h-96 w-auto object-contain"
+                          />
+                        ) : (
+                          <product.icon className="h-32 w-32 text-accent-gold relative z-10" />
+                        )}
                       </div>
                     </div>
                   </div>

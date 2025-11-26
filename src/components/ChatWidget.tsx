@@ -30,7 +30,7 @@ export function ChatWidget() {
     setError(null);
 
     try {
-      const res = await fetch("/.netlify/functions/chat", {
+      const res = await fetch("/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
