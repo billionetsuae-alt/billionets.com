@@ -27,3 +27,14 @@ dist-ssr
 .netlify
 .env
 .env.*
+
+# Vercel local project config
+.vercel
+
+# Environment files
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Test coverage
+coverage
