@@ -143,10 +143,10 @@ export default function Contact() {
                         <div>
                           <h3 className="font-semibold text-ink mb-1">Call Us</h3>
                           <a
-                            href="tel:+971501234567"
+                            href="tel:+971543541000"
                             className="text-sm text-muted-foreground hover:text-accent-gold transition-colors link-reveal"
                           >
-                            +971 50 123 4567
+                            +971 54 354 1000
                           </a>
                         </div>
                       </div>
@@ -165,8 +165,8 @@ export default function Contact() {
                     <div className="relative z-10">
                       <h3 className="font-semibold text-ink mb-2">Business Hours</h3>
                       <div className="text-sm text-muted-foreground space-y-1">
-                        <p>Sunday - Thursday: 9:00 AM - 6:00 PM</p>
-                        <p>Friday - Saturday: Closed</p>
+                        <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                        <p>Saturday - Sunday: Closed</p>
                       </div>
                     </div>
                   </Card>
@@ -232,7 +232,7 @@ export default function Contact() {
                         type="tel"
                         value={formData.phone}
                         onChange={handleChange}
-                        placeholder="+971 50 123 4567"
+                        placeholder="+971 54 354 1000"
                         className={fieldClasses}
                       />
                     </div>

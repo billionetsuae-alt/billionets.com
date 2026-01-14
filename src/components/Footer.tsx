@@ -174,37 +174,37 @@ export const Footer = () => {
       if (hasFinePointer) {
         let cursor = document.querySelector(".cursor-dot");
         if (!cursor) {
-             cursor = document.createElement("div");
-             cursor.classList.add("cursor-dot");
-             document.body.appendChild(cursor);
+          cursor = document.createElement("div");
+          cursor.classList.add("cursor-dot");
+          document.body.appendChild(cursor);
         }
 
         const onMouseMove = (e: MouseEvent) => {
-            gsap.to(cursor, {
-                x: e.clientX,
-                y: e.clientY,
-                duration: 0.1,
-                ease: "power2.out"
-            });
+          gsap.to(cursor, {
+            x: e.clientX,
+            y: e.clientY,
+            duration: 0.1,
+            ease: "power2.out"
+          });
         };
-        
+
         window.addEventListener("mousemove", onMouseMove);
         removeCursorListener = () => window.removeEventListener("mousemove", onMouseMove);
 
         const interactives = document.querySelectorAll("a, button, .card.tilt, input, textarea");
         interactives.forEach((el) => {
-            el.addEventListener("mouseenter", () => cursor?.classList.add("active"));
-            el.addEventListener("mouseleave", () => cursor?.classList.remove("active"));
+          el.addEventListener("mouseenter", () => cursor?.classList.add("active"));
+          el.addEventListener("mouseleave", () => cursor?.classList.remove("active"));
         });
       }
 
     }); // End gsap.context
 
     return () => {
-        ctx.revert();
-        if (removeCursorListener) removeCursorListener();
-        const cursor = document.querySelector(".cursor-dot");
-        if (cursor) cursor.remove();
+      ctx.revert();
+      if (removeCursorListener) removeCursorListener();
+      const cursor = document.querySelector(".cursor-dot");
+      if (cursor) cursor.remove();
     };
   }, [location.pathname]);
 
@@ -295,10 +295,10 @@ export const Footer = () => {
               <li className="flex items-center gap-3">
                 <Phone className="h-5 w-5 text-accent-gold flex-shrink-0" />
                 <a
-                  href="tel:+971501234567"
+                  href="tel:+971543541000"
                   className="text-sm text-muted-foreground hover:text-accent-gold transition-colors"
                 >
-                  +971 50 123 4567
+                  +971 54 354 1000
                 </a>
               </li>
             </ul>

@@ -14,7 +14,7 @@ export const StructuredData = ({ type }: StructuredDataProps) => {
     "logo": "https://billionets.com/logo.png",
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+971-50-123-4567",
+      "telephone": "+971 54 354 1000",
       "contactType": "customer service",
       "areaServed": "AE",
       "availableLanguage": ["en", "ar"]
@@ -41,17 +41,17 @@ export const StructuredData = ({ type }: StructuredDataProps) => {
       "addressLocality": "Dubai",
       "addressCountry": "AE"
     },
-    "telephone": "+971-50-123-4567",
+    "telephone": "+971 54 354 1000",
     "priceRange": "$$$$",
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
         "dayOfWeek": [
-          "Sunday",
           "Monday",
           "Tuesday",
           "Wednesday",
-          "Thursday"
+          "Thursday",
+          "Friday"
         ],
         "opens": "09:00",
         "closes": "18:00"
